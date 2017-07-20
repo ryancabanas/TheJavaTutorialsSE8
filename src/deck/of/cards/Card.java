@@ -20,6 +20,35 @@ public class Card {
   private static List<String> ranks;
   private static List<String> suits;
 
+  public static enum Ranks {
+    TWO("2"), THREE("3"), FOUR("4"), FIVE("5"), SIX("6"), SEVEN("7"), EIGHT("8"),
+    NINE("9"), TEN("10"), JACK("J"), QUEEN("Q"), KING("K"), ACE("A");
+
+    private final String rank;
+
+    Ranks(String rank) {
+      this.rank = rank;
+    }
+
+    String getValue() {
+      return rank;
+    }
+  }
+
+    public static enum Suits {
+    HEART("Heart"), CLUB("Club"), SPADE("Spade"), DIAMOND("Diamond");
+
+    private final String suit;
+
+    Suits(String suit) {
+      this.suit = suit;
+    }
+
+    String getValue() {
+      return suit;
+    }
+  }
+
   static {
     populateRanks();
     populateSuits();
@@ -31,13 +60,24 @@ public class Card {
   }
 
   private static void populateRanks() {
-    List<String> ranksList = Arrays.asList(
-            "2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A");
+    List<Ranks> enumRanksList = Arrays.asList(Ranks.values());
+    List<String> ranksList = new ArrayList<>();
+
+    enumRanksList.forEach((eachRank) -> {
+      ranksList.add(eachRank.getValue());
+    });
+
     ranks = new ArrayList<>(ranksList);
   }
 
   private static void populateSuits() {
-    List<String> suitsList = Arrays.asList("Heart", "Club", "Spade", "Diamond");
+    List<Suits> enumSuitsList = Arrays.asList(Suits.values());
+    List<String> suitsList = new ArrayList<>();
+
+    enumSuitsList.forEach((eachSuit) -> {
+      suitsList.add(eachSuit.getValue());
+    });
+
     suits = new ArrayList<>(suitsList);
   }
 
