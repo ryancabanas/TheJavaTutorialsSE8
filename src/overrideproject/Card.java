@@ -105,20 +105,20 @@ public class Card {
   }
 
   @Override
-  public boolean equals(Object thatObject) {
-    if (this == thatObject)
+  public boolean equals(Object obj) {
+    if (this == obj) {
       return true;
-
-    if (thatObject == null)
+    }
+    if (obj == null) {
       return false;
-
-    if (getClass() != thatObject.getClass())
+    }
+    if (getClass() != obj.getClass()) {
       return false;
+    }
+    final Card other = (Card) obj;
 
-    Card that = (Card) thatObject;
-
-    return getRank() == that.getRank()
-            && getSuit() == that.getSuit();
+    return getRank() == other.getRank()
+            && getSuit() == other.getSuit();
   }
 
   @Override

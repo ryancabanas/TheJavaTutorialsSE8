@@ -27,33 +27,47 @@ public class Deck {
   public Card getCard(int suit, int rank) {
       return cards[suit-1][rank-1];
   }
-    
-//  @Override
-//  public boolean equals(Object thatObject) {
-//    if (this == thatObject)
-//      return true;
-//
-//    if (thatObject == null)
-//      return false;
-//
-//    if (getClass() != thatObject.getClass())
-//      return false;
-//
-//    Card[][] that = (Card[][]) thatObject;
-//
-//    if (cards.length != )
-//    
-//    for (int i = 0; i ) {
-//      
-//    }
-//    return getRank() == that.getRank()
-//            && getSuit() == that.getSuit();
-//  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    }
+    if (obj == null) {
+      return false;
+    }
+    if (getClass() != obj.getClass()) {
+      return false;
+    }
+    final Deck other = (Deck) obj;
+    return Arrays.deepEquals(this.cards, other.cards);
+  }
 
   @Override
   public int hashCode() {
     int hash = 3;
     hash = 73 * hash + Arrays.deepHashCode(this.cards);
     return hash;
+  }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    for (int i = 1; i <= NUM_SUITS; i++) {
+      for (int j = 1; j <= NUM_RANKS; j++) {
+        sb.append(getCard(i, j).toString());
+        sb.append("\n");
+      }
+    }
+    return sb.toString().substring(0, sb.length()-1);
+  }
+}
+
+class DeckDemo {
+  public static void main(String[] args) {
+    Deck deck1 = new Deck();
+    Deck deck2 = new Deck();
+    System.out.println(deck1.equals(deck2));
+    System.out.println(deck1.toString());
   }
 }
