@@ -13,8 +13,8 @@ import java.util.Arrays;
  */
 public class Main {
   public static void main(String[] args) {
-    Integer[] a = {1, 2, 3};
-    Integer[] b = {2, 1, 3};
-    System.out.println(Arrays.equals(a, b));
+    Integer a = new Integer(130);
+    Integer b = new Integer(130);
+    System.out.println(a.equals(b));
   }
 }
