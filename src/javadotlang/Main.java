@@ -5,7 +5,7 @@
  */
 package javadotlang;
 
-import java.util.Arrays;
+
 
 /**
  *
@@ -13,8 +13,8 @@ import java.util.Arrays;
  */
 public class Main {
   public static void main(String[] args) {
-    Integer a = new Integer(130);
-    Integer b = new Integer(130);
-    System.out.println(a.equals(b));
+    System.out.println(Integer.toHexString(65));
+    System.out.println(Integer.parseInt("230", 5));
+    System.out.println(Integer.valueOf(1).equals(Long.valueOf(1)));
   }
 }
