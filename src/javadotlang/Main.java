@@ -5,6 +5,7 @@
  */
 package javadotlang;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -16,34 +17,44 @@ import java.util.List;
  */
 public class Main {
   public static void main(String[] args) {
-    Integer[] ints = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-    String[] strs = {"one", "two", "three"};
-//    try {
-//      Main.swapSpots(ints, 1, 8);
-//      for (Integer aInt : ints) {
-//        System.out.println(aInt);
-//      }
-//    } catch (Exception e) {
-//    }
+    List<Integer> integerList = new ArrayList<>();
+    integerList.add(10);
+    integerList.add(22);
+    integerList.add(13);
+    integerList.add(41);
+    integerList.add(15);
+
+    List<String> stringList = new ArrayList<>();
+    stringList.add("Drew");
+    stringList.add("Bob");
+    stringList.add("Cliff");
+    stringList.add("keller");
+    stringList.add("dude");
+
     try {
-      Main.swapSpots(strs, 0, 2);
-      for (String aStr : strs) {
-        System.out.println(aStr);
-      }
+      Object max = Main.maxInRange(integerList, 0, 2);
+      System.out.println(max);
     } catch (Exception e) {
+      System.out.println(e);
     }
     
   }
   
-  static <T> void swapSpots(T[] array, int index1, int index2) throws Exception {
-    if (index1 < 0 || index2 < 0 || index1 >= array.length || index2 >= array.length) {
-      System.out.println("One of the parameter indexes is outside the array bounds.");
-      throw new Exception();
+  static <T extends Comparable<T>> T maxInRange(
+          List<? extends T> list, int begin, int end) throws IndexOutOfBoundsException {
+    if (begin < 0 || begin >= list.size() || end < 0 || end >= list.size()) {
+      throw new IndexOutOfBoundsException();
     }
-    T value1, value2;
-    value1 = array[index1];
-    value2 = array[index2];
-    array[index1] = value2;
-    array[index2] = value1;
+    
+    List<? extends T> newList = list.subList(begin, end+1);
+    T maxValue = newList.get(0);
+    
+    for (int i = 1; i < newList.size(); i++) {
+      if (maxValue.compareTo(newList.get(i)) < 0) {
+        maxValue = newList.get(i);
+      }
+    }
+    
+    return maxValue;
   }
 }
