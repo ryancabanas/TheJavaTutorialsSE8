@@ -13,8 +13,12 @@ package javadotlang;
  */
 public class Main {
   public static void main(String[] args) {
-    System.out.println(Integer.toHexString(65));
-    System.out.println(Integer.parseInt("230", 5));
-    System.out.println(Integer.valueOf(1).equals(Long.valueOf(1)));
+    String name = "Ryan Edward Cabanas";
+    String result = "";
+    for (int i = 0; i < name.length(); i++) {
+      if (Character.isUpperCase(name.charAt(i)))
+        result += name.charAt(i);
+    }
+    System.out.println(result);    
   }
 }
