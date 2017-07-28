@@ -17,44 +17,44 @@ import java.util.List;
  */
 public class Main {
   public static void main(String[] args) {
-    List<Integer> integerList = new ArrayList<>();
-    integerList.add(10);
-    integerList.add(22);
-    integerList.add(13);
-    integerList.add(41);
-    integerList.add(15);
-
-    List<String> stringList = new ArrayList<>();
-    stringList.add("Drew");
-    stringList.add("Bob");
-    stringList.add("Cliff");
-    stringList.add("keller");
-    stringList.add("dude");
-
-    try {
-      Object max = Main.maxInRange(integerList, 0, 2);
-      System.out.println(max);
-    } catch (Exception e) {
-      System.out.println(e);
-    }
-    
+    List<Integer> integerList = Arrays.asList(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15);
+    UnaryPredicate<Integer> p = (x) -> x == 1;
+    System.out.println(Main.findFirst(integerList, 0, 5, p));
   }
   
-  static <T extends Comparable<T>> T maxInRange(
-          List<? extends T> list, int begin, int end) throws IndexOutOfBoundsException {
-    if (begin < 0 || begin >= list.size() || end < 0 || end >= list.size()) {
-      throw new IndexOutOfBoundsException();
-    }
+  public static <T extends Integer>
+        int findFirst(List<T> list, int begin, int end, UnaryPredicate<T> p) {
+    T theOne = null;
+    boolean relativelyPrime = true;
     
-    List<? extends T> newList = list.subList(begin, end+1);
-    T maxValue = newList.get(0);
-    
-    for (int i = 1; i < newList.size(); i++) {
-      if (maxValue.compareTo(newList.get(i)) < 0) {
-        maxValue = newList.get(i);
+    for (T t : list) {
+      for (int i = begin; i <= end; i++) {
+        if (gcd(t, list.get(i)) > 1) {
+          relativelyPrime = false;
+          break;
+        }
       }
-    }
+      
+      if (!relativelyPrime) {
+        relativelyPrime = true;
+        continue;
+      }
+      
+      theOne = t;
+      break;
+    }    
     
-    return maxValue;
+    return theOne;
+  }
+  
+  public static int gcd(int a, int b) {
+    if (b == 0 && a > 0) {
+      return a;
+    }
+    return gcd(b, a % b);
+  }
+  
+  public static interface UnaryPredicate<T> {
+    boolean test(T t);
   }
 }
